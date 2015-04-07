@@ -1,6 +1,6 @@
 package controller;
 
-import common.RequestContext;
+import common.HttpRequestContext;
 
 /**
  * http://www.SummerFramework.net
@@ -9,5 +9,5 @@ import common.RequestContext;
  */
 public interface IControllerActivator
 {
-    IController create(RequestContext requestContext, Class<IController> controllerType);
+    IController create(HttpRequestContext requestContext, Class<IController> controllerType);
 }

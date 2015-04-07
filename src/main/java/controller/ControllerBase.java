@@ -1,6 +1,6 @@
 package controller;
 
-import common.RequestContext;
+import common.HttpRequestContext;
 
 /**
  * http://www.SummerFramework.net
@@ -11,7 +11,7 @@ public abstract class ControllerBase implements IController
 {
     protected abstract void executeCore();
 
-    public void execute(RequestContext requestContext)
+    public void execute(HttpRequestContext requestContext)
     {
 
     }

@@ -1,4 +1,4 @@
-package config;
+package view;
 
 /**
  * http://www.SummerFramework.net

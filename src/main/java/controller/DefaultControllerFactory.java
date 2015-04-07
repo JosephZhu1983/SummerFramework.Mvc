@@ -1,6 +1,6 @@
 package controller;
 
-import common.RequestContext;
+import common.HttpContext;
 
 /**
  * http://www.SummerFramework.net
@@ -11,7 +11,7 @@ public class DefaultControllerFactory implements IControllerFactory
 {
     private IControllerActivator controllerActivator;
 
-    public IController createController(RequestContext requestContext, String controllerName)
+    public IController createController(HttpContext httpContext, String controllerName)
     {
         return null;
     }

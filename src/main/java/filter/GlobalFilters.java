@@ -1,4 +1,4 @@
-package config;
+package filter;
 
 /**
  * http://www.SummerFramework.net

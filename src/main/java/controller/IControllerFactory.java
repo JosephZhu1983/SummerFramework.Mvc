@@ -1,6 +1,6 @@
 package controller;
 
-import common.RequestContext;
+import common.HttpContext;
 
 /**
  * http://www.SummerFramework.net
@@ -9,7 +9,7 @@ import common.RequestContext;
  */
 public interface IControllerFactory
 {
-    IController createController(RequestContext requestContext, String controllerName);
+    IController createController(HttpContext httpContext, String controllerName);
 
     void releaseController(IController controller);
 }
