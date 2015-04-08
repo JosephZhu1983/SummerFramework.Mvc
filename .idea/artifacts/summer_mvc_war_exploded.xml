@@ -1,0 +1,26 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="summer-mvc:war exploded">
+    <output-path>$PROJECT_DIR$/../SummerFramework.Examples.Mvc/target/summermvc-examples-0.1-SNAPSHOT</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="summer-mvc" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="archive" name="summer-mvc-0.1-SNAPSHOT.jar">
+            <element id="module-output" name="SummerFramework.Mvc" />
+          </element>
+          <element id="library" level="project" name="Maven: javax.servlet:javax.servlet-api:3.1.0" />
+          <element id="library" level="project" name="Maven: com.github.spullara.mustache.java:compiler:0.9.0" />
+          <element id="library" level="project" name="Maven: org.apache.velocity:velocity:1.7" />
+          <element id="library" level="project" name="Maven: commons-collections:commons-collections:3.2.1" />
+          <element id="library" level="project" name="Maven: commons-lang:commons-lang:2.4" />
+        </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/../SummerFramework.Examples.Mvc/target/MANIFEST.MF" />
+      </element>
+      <element id="javaee-facet-resources" facet="summer-mvc/web/Web" />
+    </root>
+  </artifact>
+</component>
