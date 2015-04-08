@@ -12,19 +12,18 @@ import net.summerframework.mvc.routing.RouteTable;
  */
 public class ConfigCenter
 {
+    private static IControllerFactory controllerFactory;
+    private static RouteTable routes = new RouteTable();
+
     public static IControllerFactory getControllerFactory()
     {
         return controllerFactory;
     }
 
-    private static IControllerFactory controllerFactory;
-
     public static RouteTable getRoutes()
     {
         return routes;
     }
-
-    private static RouteTable routes = new RouteTable();
 
     public synchronized static void useDefaultConfig() throws Exception
     {

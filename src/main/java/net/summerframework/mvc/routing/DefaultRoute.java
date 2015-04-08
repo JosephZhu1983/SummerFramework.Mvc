@@ -75,6 +75,11 @@ public class DefaultRoute implements IRoute
         return parsePath(path);
     }
 
+    public VirtualPathData getVirtualPathData(HttpContext httpContext, HashMap<String, Object> values)
+    {
+        return null;
+    }
+
     private RouteData parsePath(String path)
     {
         RouteData routeData = new RouteData(this);
@@ -105,11 +110,6 @@ public class DefaultRoute implements IRoute
             }
         }
         return routeData;
-    }
-
-    public VirtualPathData getVirtualPathData(HttpContext httpContext, HashMap<String, Object> values)
-    {
-        return null;
     }
 
     class PatternSegment

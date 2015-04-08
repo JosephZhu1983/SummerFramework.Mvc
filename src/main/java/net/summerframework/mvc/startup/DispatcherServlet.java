@@ -96,24 +96,23 @@ class Example
 
     static class Item
     {
+        String name, price;
+        List<Feature> features;
         Item(String name, String price, List<Feature> features)
         {
             this.name = name;
             this.price = price;
             this.features = features;
         }
-
-        String name, price;
-        List<Feature> features;
     }
 
     static class Feature
     {
+        String description;
+
         Feature(String description)
         {
             this.description = description;
         }
-
-        String description;
     }
 }

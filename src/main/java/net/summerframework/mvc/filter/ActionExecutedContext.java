@@ -12,6 +12,10 @@ import net.summerframework.mvc.common.ControllerContext;
 public class ActionExecutedContext extends ControllerContext
 {
     private ActionDescriptor actionDescriptor;
+    private ActionResult actionResult;
+    private boolean canceled;
+    private Exception exception;
+    private boolean exceptionHandled;
 
     public ActionDescriptor getActionDescriptor()
     {
@@ -62,9 +66,4 @@ public class ActionExecutedContext extends ControllerContext
     {
         this.exceptionHandled = exceptionHandled;
     }
-
-    private ActionResult actionResult;
-    private boolean canceled;
-    private Exception exception;
-    private boolean exceptionHandled;
 }

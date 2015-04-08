@@ -12,6 +12,17 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class HttpContext
 {
+    private final HttpServletRequest request;
+    private final HttpServletResponse response;
+    private RouteData routeData;
+
+    public HttpContext(HttpServletRequest request, HttpServletResponse response)
+    {
+        this.request = request;
+        this.response = response;
+        this.response.setCharacterEncoding("utf-8");
+    }
+
     public RouteData getRouteData()
     {
         return routeData;
@@ -22,8 +33,6 @@ public class HttpContext
         this.routeData = routeData;
     }
 
-    private RouteData routeData;
-
     public HttpServletRequest getRequest()
     {
         return request;
@@ -32,16 +41,6 @@ public class HttpContext
     public HttpServletResponse getResponse()
     {
         return response;
-    }
-
-    private final HttpServletRequest request;
-    private final HttpServletResponse response;
-
-    public HttpContext(HttpServletRequest request, HttpServletResponse response)
-    {
-        this.request = request;
-        this.response = response;
-        this.response.setCharacterEncoding("utf-8");
     }
 
     public void write(String content)
