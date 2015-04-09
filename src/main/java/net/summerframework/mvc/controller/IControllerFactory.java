@@ -9,7 +9,7 @@ import net.summerframework.mvc.common.HttpContext;
  */
 public interface IControllerFactory
 {
-    IController createController(HttpContext httpContext, String controllerName);
+    IController createController(HttpContext httpContext, String controllerName) throws ControllerActivatorException, ControllerFactoryException;
 
     void releaseController(IController controller);
 }

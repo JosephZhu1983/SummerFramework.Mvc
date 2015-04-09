@@ -13,7 +13,7 @@ public class RouteData
     private static final String ACTION_NAME_PLACEHOLDER = "action";
 
     private final IRoute route;
-    private final HashMap<String, String> values = new HashMap<String, String>();
+    private final HashMap<String, String> values = new HashMap<>();
 
     public RouteData(IRoute route)
     {

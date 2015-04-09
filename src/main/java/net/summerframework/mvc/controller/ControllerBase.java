@@ -15,4 +15,9 @@ public abstract class ControllerBase implements IController
     {
 
     }
+
+    public void release()
+    {
+
+    }
 }

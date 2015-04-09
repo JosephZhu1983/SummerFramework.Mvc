@@ -6,6 +6,7 @@ import org.reflections.Reflections;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
 
+import javax.servlet.ServletException;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -17,7 +18,7 @@ import java.util.stream.Collectors;
 public class DefaultControllerFactory implements IControllerFactory
 {
     private IControllerActivator controllerActivator;
-    private static Map<String, Class<? extends IController>> controllerTypes = new HashMap<>();
+    private static Set<Class<? extends IController>> controllerTypes;
 
     static
     {
@@ -26,7 +27,7 @@ public class DefaultControllerFactory implements IControllerFactory
         {
             if (controllerType != ControllerBase.class && controllerType != Controller.class)
             {
-                controllerTypes.put(controllerType.getName(), controllerType);
+                controllerTypes.add(controllerType);
             }
         }
     }
@@ -35,13 +36,20 @@ public class DefaultControllerFactory implements IControllerFactory
         this.controllerActivator = controllerActivator;
     }
 
-    public IController createController(HttpContext httpContext, String controllerName)
+    public IController createController(HttpContext httpContext, String controllerName) throws ControllerActivatorException, ControllerFactoryException
     {
-        return null;
+        for(Class<? extends IController> controllerType : controllerTypes)
+        {
+            if (controllerType.getSimpleName().equalsIgnoreCase(controllerName))
+            {
+                return controllerActivator.create(httpContext, controllerType);
+            }
+        }
+        throw new ControllerFactoryException(String.format("Can not find matched controller to name %s", controllerName));
     }
 
     public void releaseController(IController controller)
     {
-
+        controller.release();
     }
 }

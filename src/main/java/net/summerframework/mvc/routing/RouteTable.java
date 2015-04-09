@@ -2,6 +2,7 @@ package net.summerframework.mvc.routing;
 
 import net.summerframework.mvc.common.HttpContext;
 
+import javax.servlet.ServletException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -11,7 +12,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class RouteTable extends ConcurrentHashMap<String, IRoute>
 {
-    public RouteData getRouteData(HttpContext httpContext)
+    public RouteData getRouteData(HttpContext httpContext) throws RouteException
     {
         for (IRoute route : values())
         {
@@ -21,6 +22,6 @@ public class RouteTable extends ConcurrentHashMap<String, IRoute>
                 return routeData;
             }
         }
-        return null;
+        throw new RouteException(String.format("Can not find matched route for %s", httpContext.getRequest().getRequestURL()));
     }
 }

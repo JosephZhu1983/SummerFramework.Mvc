@@ -3,9 +3,9 @@ package net.summerframework.mvc.startup;
 import net.summerframework.mvc.common.HttpContext;
 import net.summerframework.mvc.config.ConfigCenter;
 import net.summerframework.mvc.config.DefaultConfig;
-import net.summerframework.mvc.controller.IController;
-import net.summerframework.mvc.controller.IControllerFactory;
+import net.summerframework.mvc.controller.*;
 import net.summerframework.mvc.routing.RouteData;
+import net.summerframework.mvc.routing.RouteException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -30,15 +30,33 @@ public class DispatcherServlet extends HttpServlet
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
         HttpContext httpContext = new HttpContext(request, response);
-        RouteData routeData = ConfigCenter.getInstance().getRouteTable().getRouteData(httpContext);
-        if (routeData == null)
-            throw new ServletException(String.format("Can not find matched route for %s", request.getRequestURL()));
+        RouteData routeData;
+        try
+        {
+            routeData = ConfigCenter.getInstance().getRouteTable().getRouteData(httpContext);
+        }
+        catch (RouteException exception)
+        {
+            throw new ServletException(exception.getMessage(), exception);
+        }
+
         String controllerName = routeData.getControllerName();
 
         IControllerFactory controllerFactory = ConfigCenter.getInstance().getControllerFactory();
-        IController controller = controllerFactory.createController(httpContext, controllerName);
-        controller.execute(httpContext);
-        controllerFactory.releaseController(controller);
+        IController controller;
+        try
+        {
+            controller = controllerFactory.createController(httpContext, controllerName);
+        }
+        catch (ControllerActivatorException|ControllerFactoryException exception)
+        {
+            throw new ServletException(exception.getMessage(), exception);
+        }
+        if (controller != null)
+        {
+            controller.execute(httpContext);
+            controllerFactory.releaseController(controller);
+        }
 
 
         //System.out.println(request.getServletContext().getRealPath("template.mustache"));

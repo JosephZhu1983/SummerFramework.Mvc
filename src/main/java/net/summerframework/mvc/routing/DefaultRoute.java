@@ -12,14 +12,14 @@ import java.util.*;
 public class DefaultRoute implements IRoute
 {
     //{controller??Home}/{action??Index}/{id?}
-    private final List<PatternSegment> patternSegments = new ArrayList<PatternSegment>();
+    private final List<PatternSegment> patternSegments = new ArrayList<>();
 
-    public DefaultRoute(String pattern) throws Exception
+    public DefaultRoute(String pattern) throws RouteException
     {
         parsePattern(pattern);
     }
 
-    private void parsePattern(String pattern) throws Exception
+    private void parsePattern(String pattern) throws RouteException
     {
         for (String segment : pattern.toLowerCase().split("/"))
         {
@@ -34,7 +34,7 @@ public class DefaultRoute implements IRoute
                         patternSegment.placeHolderName = segment.substring(0, segment.indexOf("??"));
                         if (segment.indexOf("??") + 2 == segment.length())
                         {
-                            throw new Exception(String.format("Invalid route pattern '%s', missing default value in '%s'", pattern, segment));
+                            throw new RouteException(String.format("Invalid route pattern '%s', missing default value in '%s'", pattern, segment));
                         }
                         else
                         {
@@ -49,7 +49,7 @@ public class DefaultRoute implements IRoute
                 }
                 else
                 {
-                    throw new Exception(String.format("Invalid route pattern '%s', missing } in '%s'", pattern, segment));
+                    throw new RouteException(String.format("Invalid route pattern '%s', missing } in '%s'", pattern, segment));
                 }
             }
             else
@@ -60,7 +60,7 @@ public class DefaultRoute implements IRoute
                 }
                 else
                 {
-                    throw new Exception(String.format("Invalid route pattern '%s', missing { in '%s'", pattern, segment));
+                    throw new RouteException(String.format("Invalid route pattern '%s', missing { in '%s'", pattern, segment));
                 }
             }
             patternSegments.add(patternSegment);
