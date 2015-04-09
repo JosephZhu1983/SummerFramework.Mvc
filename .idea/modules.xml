@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SummerFramework.Mvc.iml" filepath="$PROJECT_DIR$/SummerFramework.Mvc.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../SummerFramework.Examples.Mvc/summer-mvc.iml" filepath="$PROJECT_DIR$/../SummerFramework.Examples.Mvc/summer-mvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/summer-webmvc.iml" filepath="$PROJECT_DIR$/summer-webmvc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../summer-webmvc-examples/summer-webmvc-examples.iml" filepath="$PROJECT_DIR$/../summer-webmvc-examples/summer-webmvc-examples.iml" />
     </modules>
   </component>
 </project>

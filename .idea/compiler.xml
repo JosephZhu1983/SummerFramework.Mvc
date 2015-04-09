@@ -22,13 +22,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="summer-mvc" />
-        <module name="SummerFramework.Mvc" />
+        <module name="summer-webmvc" />
+        <module name="summer-webmvc-examples" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="summer-mvc" target="1.8" />
-      <module name="SummerFramework.Mvc" target="1.5" />
+      <module name="summer-webmvc" target="1.5" />
+      <module name="summer-webmvc-examples" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

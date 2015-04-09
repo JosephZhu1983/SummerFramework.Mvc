@@ -9,18 +9,11 @@ import java.util.concurrent.ConcurrentHashMap;
  * Joseph Zhu
  * yzhu@live.com
  */
-public class RouteTable
+public class RouteTable extends ConcurrentHashMap<String, IRoute>
 {
-    private ConcurrentHashMap<String, IRoute> routes = new ConcurrentHashMap<String, IRoute>();
-
-    public void addRoute(String routeName, IRoute route)
-    {
-        routes.put(routeName, route);
-    }
-
     public RouteData getRouteData(HttpContext httpContext)
     {
-        for (IRoute route : routes.values())
+        for (IRoute route : values())
         {
             RouteData routeData = route.getRouteData(httpContext);
             if (routeData != null)

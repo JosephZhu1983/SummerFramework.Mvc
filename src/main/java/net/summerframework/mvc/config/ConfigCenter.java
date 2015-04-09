@@ -2,8 +2,9 @@ package net.summerframework.mvc.config;
 
 import net.summerframework.mvc.controller.DefaultControllerFactory;
 import net.summerframework.mvc.controller.IControllerFactory;
-import net.summerframework.mvc.routing.DefaultRoute;
-import net.summerframework.mvc.routing.RouteTable;
+import net.summerframework.mvc.routing.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * http://www.SummerFramework.net
@@ -12,23 +13,57 @@ import net.summerframework.mvc.routing.RouteTable;
  */
 public class ConfigCenter
 {
-    private static IControllerFactory controllerFactory;
-    private static RouteTable routes = new RouteTable();
+    private static ConfigCenter instance = new ConfigCenter();
 
-    public static IControllerFactory getControllerFactory()
+    public static ConfigCenter getInstance()
+    {
+        return instance;
+    }
+
+    protected ConfigCenter()
+    {
+    }
+
+    private final Logger logger = LoggerFactory.getLogger(ConfigCenter.class);
+
+    private IControllerFactory controllerFactory;
+    private RouteTable routeTable = new RouteTable();
+
+    public IControllerFactory getControllerFactory()
     {
         return controllerFactory;
     }
 
-    public static RouteTable getRoutes()
+    protected void setControllerFactory(IControllerFactory controllerFactory)
     {
-        return routes;
+        this.controllerFactory = controllerFactory;
     }
 
-    public synchronized static void useDefaultConfig() throws Exception
+    public RouteTable getRouteTable()
     {
-        controllerFactory = new DefaultControllerFactory();
-        DefaultRoute defaultRoute = new DefaultRoute("{controller??Home}/{action??Index}/{id?}");
-        routes.addRoute("default", defaultRoute);
+        return routeTable;
     }
+
+    protected void addRoute(String routeName, IRoute route)
+    {
+        routeTable.put(routeName, route);
+    }
+
+    protected void addDefaultRoutePattern(String routeName, String pattern)
+    {
+        try
+        {
+            addRoute(routeName, new DefaultRoute(pattern));
+        }
+        catch (Exception e)
+        {
+            logger.warn(e.getMessage());
+        }
+    }
+
+    protected void removeAllRoutes()
+    {
+        routeTable.clear();
+    }
+
 }

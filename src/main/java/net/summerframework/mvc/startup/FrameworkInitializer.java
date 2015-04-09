@@ -13,17 +13,9 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class FrameworkInitializer implements ServletContextListener
 {
+
     public void contextInitialized(ServletContextEvent servletContextEvent)
     {
-        System.out.println("ServletContextListener.contextInitialized");
-        try
-        {
-            ConfigCenter.useDefaultConfig();
-        }
-        catch (Exception exception)
-        {
-            System.out.println(exception.getMessage());
-        }
         ServletContext servletContext = servletContextEvent.getServletContext();
         ServletRegistration.Dynamic dispatcherServlet = servletContext.addServlet("summerframework.mvc", DispatcherServlet.class);
         dispatcherServlet.setLoadOnStartup(1);
@@ -32,6 +24,6 @@ public class FrameworkInitializer implements ServletContextListener
 
     public void contextDestroyed(ServletContextEvent servletContextEvent)
     {
-        System.out.println("ServletContextListener.contextDestroyed");
+
     }
 }
