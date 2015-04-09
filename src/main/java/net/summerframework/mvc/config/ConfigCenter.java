@@ -13,21 +13,21 @@ import org.slf4j.LoggerFactory;
  */
 public class ConfigCenter
 {
-    private static ConfigCenter instance = new ConfigCenter();
+    private static final ConfigCenter instance = new ConfigCenter();
 
     public static ConfigCenter getInstance()
     {
         return instance;
     }
 
-    protected ConfigCenter()
+    private ConfigCenter()
     {
     }
 
     private final Logger logger = LoggerFactory.getLogger(ConfigCenter.class);
 
     private IControllerFactory controllerFactory;
-    private RouteTable routeTable = new RouteTable();
+    private final RouteTable routeTable = new RouteTable();
 
     public IControllerFactory getControllerFactory()
     {

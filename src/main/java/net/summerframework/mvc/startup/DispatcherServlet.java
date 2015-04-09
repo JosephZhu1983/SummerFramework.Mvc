@@ -2,6 +2,7 @@ package net.summerframework.mvc.startup;
 
 import net.summerframework.mvc.common.HttpContext;
 import net.summerframework.mvc.config.ConfigCenter;
+import net.summerframework.mvc.config.DefaultConfig;
 import net.summerframework.mvc.controller.IController;
 import net.summerframework.mvc.controller.IControllerFactory;
 import net.summerframework.mvc.routing.RouteData;
@@ -21,6 +22,8 @@ public class DispatcherServlet extends HttpServlet
     public void init() throws ServletException
     {
         super.init();
+        new DefaultConfig().config(ConfigCenter.getInstance());
+
     }
 
     @Override

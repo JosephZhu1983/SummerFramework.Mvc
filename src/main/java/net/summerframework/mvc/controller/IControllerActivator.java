@@ -9,5 +9,5 @@ import net.summerframework.mvc.common.HttpContext;
  */
 public interface IControllerActivator
 {
-    IController create(HttpContext httpContext, Class<IController> controllerType);
+    IController create(HttpContext httpContext, Class<? extends IController> controllerType) throws Exception;
 }

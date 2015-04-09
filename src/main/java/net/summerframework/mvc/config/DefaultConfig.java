@@ -1,5 +1,6 @@
 package net.summerframework.mvc.config;
 
+import net.summerframework.mvc.controller.DefaultControllerActivator;
 import net.summerframework.mvc.controller.DefaultControllerFactory;
 
 /**
@@ -11,7 +12,7 @@ public class DefaultConfig implements IConfig
 {
     public void config(ConfigCenter configCenter)
     {
-        configCenter.setControllerFactory(new DefaultControllerFactory());
+        configCenter.setControllerFactory(new DefaultControllerFactory(new DefaultControllerActivator()));
         configCenter.removeAllRoutes();
         configCenter.addDefaultRoutePattern("default", "{controller??Home}/{action??Index}/{id?}");
     }
