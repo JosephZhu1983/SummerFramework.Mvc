@@ -1,7 +1,7 @@
 package net.summerframework.mvc.controller;
 
-import net.summerframework.mvc.action.ContentResult;
-import net.summerframework.mvc.action.IActionInvoker;
+import net.summerframework.mvc.action.*;
+import net.summerframework.mvc.common.ControllerException;
 import net.summerframework.mvc.config.ConfigCenter;
 import net.summerframework.mvc.filter.*;
 import net.summerframework.mvc.view.PartialViewResult;
@@ -42,10 +42,17 @@ public abstract class Controller extends ControllerBase implements IExceptionFil
     }
 
     @Override
-    protected void executeCore()
+    protected void executeCore() throws ControllerException
     {
         String actionName = controllerContext.getRouteData().getActionName();
-        actionInvoker.invokeAction(controllerContext, actionName);
+        try
+        {
+            actionInvoker.invokeAction(controllerContext, actionName);
+        }
+        catch (ActionInvokerException exception)
+        {
+            throw new ControllerException(String.format("Error executing controller : %s", this.toString()), exception);
+        }
     }
 
     protected ViewResult view()

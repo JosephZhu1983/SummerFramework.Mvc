@@ -3,6 +3,7 @@ package net.summerframework.mvc.common;
 import com.esotericsoftware.reflectasm.MethodAccess;
 import com.sun.istack.internal.FinalArrayList;
 import net.summerframework.mvc.action.ActionMethodSelector;
+import net.summerframework.mvc.action.ActionResult;
 import net.summerframework.mvc.controller.IController;
 import net.summerframework.mvc.filter.*;
 
@@ -29,7 +30,10 @@ public class ControllerDescriptor
         this.controllerType = controllerType;
         for(Method method : controllerType.getMethods())
         {
-            actionDescriptors.add(new ActionDescriptor(method, this));
+            if (method.getReturnType() == ActionResult.class)
+            {
+                actionDescriptors.add(new ActionDescriptor(method, this));
+            }
         }
         init();
     }

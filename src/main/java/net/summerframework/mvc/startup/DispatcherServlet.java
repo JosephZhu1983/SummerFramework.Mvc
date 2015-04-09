@@ -1,5 +1,6 @@
 package net.summerframework.mvc.startup;
 
+import net.summerframework.mvc.common.ControllerException;
 import net.summerframework.mvc.common.HttpContext;
 import net.summerframework.mvc.config.ConfigCenter;
 import net.summerframework.mvc.config.DefaultConfig;
@@ -54,7 +55,14 @@ public class DispatcherServlet extends HttpServlet
         }
         if (controller != null)
         {
-            controller.execute(httpContext);
+            try
+            {
+                controller.execute(httpContext);
+            }
+            catch (ControllerException exception)
+            {
+                throw new ServletException(exception.getMessage(), exception);
+            }
             controllerFactory.releaseController(controller);
         }
 

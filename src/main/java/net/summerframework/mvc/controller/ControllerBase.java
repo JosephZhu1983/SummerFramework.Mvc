@@ -1,7 +1,7 @@
 package net.summerframework.mvc.controller;
 
-import net.summerframework.mvc.common.ControllerContext;
-import net.summerframework.mvc.common.HttpContext;
+import net.summerframework.mvc.action.ActionInvokerException;
+import net.summerframework.mvc.common.*;
 
 /**
  * http://www.SummerFramework.net
@@ -12,9 +12,9 @@ public abstract class ControllerBase implements IController
 {
     protected ControllerContext controllerContext;
 
-    protected abstract void executeCore();
+    protected abstract void executeCore() throws ControllerException;
 
-    public void execute(HttpContext httpContext)
+    public void execute(HttpContext httpContext) throws ControllerException
     {
         controllerContext = new ControllerContext();
         controllerContext.setController(this);

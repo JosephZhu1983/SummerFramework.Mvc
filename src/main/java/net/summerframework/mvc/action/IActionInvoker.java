@@ -9,5 +9,5 @@ import net.summerframework.mvc.common.ControllerContext;
  */
 public interface IActionInvoker
 {
-    boolean invokeAction(ControllerContext controllerContext, String actionName);
+    boolean invokeAction(ControllerContext controllerContext, String actionName) throws ActionInvokerException;
 }

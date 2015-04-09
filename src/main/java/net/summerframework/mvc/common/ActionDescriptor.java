@@ -14,6 +14,11 @@ import java.util.*;
  */
 public class ActionDescriptor
 {
+    public String getActionName()
+    {
+        return actionName;
+    }
+
     private String actionName;
     private final Method action;
 
