@@ -2,6 +2,8 @@ package net.summerframework.mvc.config;
 
 import net.summerframework.mvc.action.IActionInvoker;
 import net.summerframework.mvc.controller.IControllerFactory;
+import net.summerframework.mvc.filter.FilterProviders;
+import net.summerframework.mvc.filter.IFilterProvider;
 import net.summerframework.mvc.routing.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +20,23 @@ public class ConfigCenter
     private final RouteTable routeTable = new RouteTable();
     private IControllerFactory controllerFactory;
     private IActionInvoker actionInvoker;
+
+    public FilterProviders getFilterProviders()
+    {
+        return filterProviders;
+    }
+
+    public void removeAllFilterProviders()
+    {
+        filterProviders.clear();
+    }
+
+    public void addFilterProvider(IFilterProvider filterProvider)
+    {
+        filterProviders.add(filterProvider);
+    }
+
+    private FilterProviders filterProviders = new FilterProviders();
 
     private ConfigCenter()
     {

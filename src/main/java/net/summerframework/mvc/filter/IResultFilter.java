@@ -5,7 +5,7 @@ package net.summerframework.mvc.filter;
  * Joseph Zhu
  * yzhu@live.com
  */
-public interface IResultFilter
+public interface IResultFilter extends IFilter
 {
     void onResultExecuting(ResultExecutingContext filterContext);
 

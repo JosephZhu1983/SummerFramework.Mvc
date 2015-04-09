@@ -1,5 +1,12 @@
 package net.summerframework.mvc.common;
 
+import com.esotericsoftware.reflectasm.MethodAccess;
+import net.summerframework.mvc.filter.*;
+
+import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
+import java.util.*;
+
 /**
  * http://www.SummerFramework.net
  * Joseph Zhu
@@ -7,4 +14,52 @@ package net.summerframework.mvc.common;
  */
 public class ActionDescriptor
 {
+    private String actionName;
+    private final Method action;
+
+    public ControllerDescriptor getControllerDescriptor()
+    {
+        return controllerDescriptor;
+    }
+
+    private final ControllerDescriptor controllerDescriptor;
+    private final List<ParameterDescriptor> parameterDescriptors = new ArrayList<>();
+    private List<FilterInfo> filtersInfo = new ArrayList<>();
+
+    public ActionDescriptor(Method action, ControllerDescriptor controllerDescriptor)
+    {
+        this.action = action;
+        this.controllerDescriptor = controllerDescriptor;
+        for(Parameter parameter : action.getParameters())
+        {
+            parameterDescriptors.add(new ParameterDescriptor(parameter, this));
+        }
+        init();
+    }
+
+    private void init()
+    {
+        actionName = action.getName();
+        for(GeneralFilter filter : action.getAnnotationsByType(GeneralFilter.class))
+        {
+            filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Action, filter.order()));
+        }
+        for(ExceptionFilter filter : action.getAnnotationsByType(ExceptionFilter.class))
+        {
+            filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Action, filter.order()));
+        }
+        for(ActionFilter filter : action.getAnnotationsByType(ActionFilter.class))
+        {
+            filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Action, filter.order()));
+        }
+        for(ResultFilter filter : action.getAnnotationsByType(ResultFilter.class))
+        {
+            filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Action, filter.order()));
+        }
+    }
+
+    public Collection<FilterInfo> getFiltersInfo()
+    {
+        return filtersInfo;
+    }
 }

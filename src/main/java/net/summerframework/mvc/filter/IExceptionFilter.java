@@ -5,7 +5,7 @@ package net.summerframework.mvc.filter;
  * Joseph Zhu
  * yzhu@live.com
  */
-public interface IExceptionFilter
+public interface IExceptionFilter extends IFilter
 {
     void onException(ExceptionContext filterContext);
 }

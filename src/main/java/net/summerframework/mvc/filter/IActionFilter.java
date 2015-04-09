@@ -5,7 +5,7 @@ package net.summerframework.mvc.filter;
  * Joseph Zhu
  * yzhu@live.com
  */
-public interface IActionFilter
+public interface IActionFilter extends IFilter
 {
     void onActionExecuting(ActionExecutingContext filterContext);
 
