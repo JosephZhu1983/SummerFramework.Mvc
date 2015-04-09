@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="summer-webmvc-examples:war">
+    <output-path>$PROJECT_DIR$/../summer-webmvc-examples/target</output-path>
+    <root id="archive" name="summer-webmvc-examples-0.1-SNAPSHOT.war">
+      <element id="artifact" artifact-name="summer-webmvc-examples:war exploded" />
+    </root>
+  </artifact>
+</component>
