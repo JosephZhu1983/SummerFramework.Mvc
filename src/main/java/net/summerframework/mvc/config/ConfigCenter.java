@@ -20,6 +20,16 @@ public class ConfigCenter
     private final RouteTable routeTable = new RouteTable();
     private IControllerFactory controllerFactory;
     private IActionInvoker actionInvoker;
+    private FilterProviders filterProviders = new FilterProviders();
+
+    private ConfigCenter()
+    {
+    }
+
+    public static ConfigCenter getInstance()
+    {
+        return instance;
+    }
 
     public FilterProviders getFilterProviders()
     {
@@ -34,17 +44,6 @@ public class ConfigCenter
     public void addFilterProvider(IFilterProvider filterProvider)
     {
         filterProviders.add(filterProvider);
-    }
-
-    private FilterProviders filterProviders = new FilterProviders();
-
-    private ConfigCenter()
-    {
-    }
-
-    public static ConfigCenter getInstance()
-    {
-        return instance;
     }
 
     public IActionInvoker getActionInvoker()

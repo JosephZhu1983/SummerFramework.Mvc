@@ -17,7 +17,7 @@ public class FilterProviders extends ArrayList<IFilterProvider> implements IFilt
     {
         List<FilterInfo> filters = new ArrayList<>();
 
-        for(IFilterProvider filterProvider : this)
+        for (IFilterProvider filterProvider : this)
         {
             filters.addAll(filterProvider.getFiltersInfo(controllerContext, actionDescriptor));
         }

@@ -9,9 +9,9 @@ import java.lang.reflect.Parameter;
  */
 public class ParameterDescriptor
 {
-    private String parameterName;
     private final Parameter parameter;
     private final ActionDescriptor actionDescriptor;
+    private String parameterName;
 
     public ParameterDescriptor(Parameter parameter, ActionDescriptor actionDescriptor)
     {

@@ -11,7 +11,7 @@ public enum FilterScope
 
     private int scope = 0;
 
-    private FilterScope(int scope)
+    FilterScope(int scope)
     {
         this.scope = scope;
     }

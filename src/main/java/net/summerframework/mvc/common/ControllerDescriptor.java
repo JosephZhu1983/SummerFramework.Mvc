@@ -1,15 +1,10 @@
 package net.summerframework.mvc.common;
 
-import com.esotericsoftware.reflectasm.MethodAccess;
-import com.sun.istack.internal.FinalArrayList;
 import net.summerframework.mvc.action.ActionMethodSelector;
 import net.summerframework.mvc.action.ActionResult;
 import net.summerframework.mvc.controller.IController;
 import net.summerframework.mvc.filter.*;
 
-import javax.swing.*;
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.*;
 
@@ -28,7 +23,7 @@ public class ControllerDescriptor
     public ControllerDescriptor(Class<? extends IController> controllerType)
     {
         this.controllerType = controllerType;
-        for(Method method : controllerType.getMethods())
+        for (Method method : controllerType.getMethods())
         {
             if (method.getReturnType() == ActionResult.class)
             {
@@ -50,19 +45,19 @@ public class ControllerDescriptor
 
     private void init()
     {
-        for(GeneralFilter filter : controllerType.getAnnotationsByType(GeneralFilter.class))
+        for (GeneralFilter filter : controllerType.getAnnotationsByType(GeneralFilter.class))
         {
             filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Controller, filter.order()));
         }
-        for(ExceptionFilter filter : controllerType.getAnnotationsByType(ExceptionFilter.class))
+        for (ExceptionFilter filter : controllerType.getAnnotationsByType(ExceptionFilter.class))
         {
             filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Controller, filter.order()));
         }
-        for(ActionFilter filter : controllerType.getAnnotationsByType(ActionFilter.class))
+        for (ActionFilter filter : controllerType.getAnnotationsByType(ActionFilter.class))
         {
             filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Controller, filter.order()));
         }
-        for(ResultFilter filter : controllerType.getAnnotationsByType(ResultFilter.class))
+        for (ResultFilter filter : controllerType.getAnnotationsByType(ResultFilter.class))
         {
             filtersInfo.add(new FilterInfo(filter.type(), FilterScope.Controller, filter.order()));
         }

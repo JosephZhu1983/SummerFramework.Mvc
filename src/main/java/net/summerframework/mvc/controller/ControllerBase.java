@@ -1,6 +1,5 @@
 package net.summerframework.mvc.controller;
 
-import net.summerframework.mvc.action.ActionInvokerException;
 import net.summerframework.mvc.common.*;
 
 /**
