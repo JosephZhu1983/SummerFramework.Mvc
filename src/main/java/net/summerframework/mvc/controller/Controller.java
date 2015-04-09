@@ -1,6 +1,8 @@
 package net.summerframework.mvc.controller;
 
 import net.summerframework.mvc.action.ContentResult;
+import net.summerframework.mvc.action.IActionInvoker;
+import net.summerframework.mvc.config.ConfigCenter;
 import net.summerframework.mvc.filter.*;
 import net.summerframework.mvc.view.PartialViewResult;
 import net.summerframework.mvc.view.ViewResult;
@@ -12,6 +14,8 @@ import net.summerframework.mvc.view.ViewResult;
  */
 public abstract class Controller extends ControllerBase implements IExceptionFilter, IActionFilter, IResultFilter
 {
+    private IActionInvoker actionInvoker = ConfigCenter.getInstance().getActionInvoker();
+
     public void onException(ExceptionContext filterContext)
     {
 
@@ -40,7 +44,8 @@ public abstract class Controller extends ControllerBase implements IExceptionFil
     @Override
     protected void executeCore()
     {
-
+        String actionName = controllerContext.getRouteData().getActionName();
+        actionInvoker.invokeAction(controllerContext, actionName);
     }
 
     protected ViewResult view()
@@ -55,6 +60,11 @@ public abstract class Controller extends ControllerBase implements IExceptionFil
 
     protected ContentResult content(String content)
     {
-        return new ContentResult();
+        return new ContentResult(content);
+    }
+
+    protected ContentResult content(String type, String charset, String content)
+    {
+        return new ContentResult(type, charset, content);
     }
 }

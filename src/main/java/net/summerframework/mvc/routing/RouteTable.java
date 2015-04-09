@@ -2,7 +2,6 @@ package net.summerframework.mvc.routing;
 
 import net.summerframework.mvc.common.HttpContext;
 
-import javax.servlet.ServletException;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**

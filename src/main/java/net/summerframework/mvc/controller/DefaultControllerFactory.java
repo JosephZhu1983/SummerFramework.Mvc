@@ -1,14 +1,9 @@
 package net.summerframework.mvc.controller;
 
 import net.summerframework.mvc.common.HttpContext;
-import net.summerframework.mvc.config.DefaultConfig;
 import org.reflections.Reflections;
-import org.reflections.util.ConfigurationBuilder;
-import org.reflections.util.FilterBuilder;
 
-import javax.servlet.ServletException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 /**
  * http://www.SummerFramework.net
@@ -17,13 +12,12 @@ import java.util.stream.Collectors;
  */
 public class DefaultControllerFactory implements IControllerFactory
 {
-    private IControllerActivator controllerActivator;
     private static Set<Class<? extends IController>> controllerTypes;
 
     static
     {
         Reflections reflections = new Reflections();
-        for(Class<? extends IController> controllerType : reflections.getSubTypesOf(IController.class))
+        for (Class<? extends IController> controllerType : reflections.getSubTypesOf(IController.class))
         {
             if (controllerType != ControllerBase.class && controllerType != Controller.class)
             {
@@ -31,6 +25,9 @@ public class DefaultControllerFactory implements IControllerFactory
             }
         }
     }
+
+    private IControllerActivator controllerActivator;
+
     public DefaultControllerFactory(IControllerActivator controllerActivator)
     {
         this.controllerActivator = controllerActivator;
@@ -38,14 +35,14 @@ public class DefaultControllerFactory implements IControllerFactory
 
     public IController createController(HttpContext httpContext, String controllerName) throws ControllerActivatorException, ControllerFactoryException
     {
-        for(Class<? extends IController> controllerType : controllerTypes)
+        for (Class<? extends IController> controllerType : controllerTypes)
         {
             if (controllerType.getSimpleName().equalsIgnoreCase(controllerName))
             {
                 return controllerActivator.create(httpContext, controllerType);
             }
         }
-        throw new ControllerFactoryException(String.format("Can not find matched controller to name %s", controllerName));
+        throw new ControllerFactoryException(String.format("Can not find controller matched to name %s", controllerName));
     }
 
     public void releaseController(IController controller)

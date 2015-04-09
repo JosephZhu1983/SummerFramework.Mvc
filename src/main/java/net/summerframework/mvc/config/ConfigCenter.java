@@ -1,6 +1,6 @@
 package net.summerframework.mvc.config;
 
-import net.summerframework.mvc.controller.DefaultControllerFactory;
+import net.summerframework.mvc.action.IActionInvoker;
 import net.summerframework.mvc.controller.IControllerFactory;
 import net.summerframework.mvc.routing.*;
 import org.slf4j.Logger;
@@ -14,20 +14,29 @@ import org.slf4j.LoggerFactory;
 public class ConfigCenter
 {
     private static final ConfigCenter instance = new ConfigCenter();
+    private final Logger logger = LoggerFactory.getLogger(ConfigCenter.class);
+    private final RouteTable routeTable = new RouteTable();
+    private IControllerFactory controllerFactory;
+    private IActionInvoker actionInvoker;
+
+    private ConfigCenter()
+    {
+    }
 
     public static ConfigCenter getInstance()
     {
         return instance;
     }
 
-    private ConfigCenter()
+    public IActionInvoker getActionInvoker()
     {
+        return actionInvoker;
     }
 
-    private final Logger logger = LoggerFactory.getLogger(ConfigCenter.class);
-
-    private IControllerFactory controllerFactory;
-    private final RouteTable routeTable = new RouteTable();
+    public void setActionInvoker(IActionInvoker actionInvoker)
+    {
+        this.actionInvoker = actionInvoker;
+    }
 
     public IControllerFactory getControllerFactory()
     {

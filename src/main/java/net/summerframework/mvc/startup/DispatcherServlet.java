@@ -48,7 +48,7 @@ public class DispatcherServlet extends HttpServlet
         {
             controller = controllerFactory.createController(httpContext, controllerName);
         }
-        catch (ControllerActivatorException|ControllerFactoryException exception)
+        catch (ControllerActivatorException | ControllerFactoryException exception)
         {
             throw new ServletException(exception.getMessage(), exception);
         }

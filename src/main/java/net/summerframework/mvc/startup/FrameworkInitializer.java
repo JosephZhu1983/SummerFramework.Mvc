@@ -1,7 +1,5 @@
 package net.summerframework.mvc.startup;
 
-import net.summerframework.mvc.config.ConfigCenter;
-
 import javax.servlet.*;
 import javax.servlet.annotation.WebListener;
 

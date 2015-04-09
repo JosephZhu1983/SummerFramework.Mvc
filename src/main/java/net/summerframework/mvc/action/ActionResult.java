@@ -9,5 +9,5 @@ import net.summerframework.mvc.common.ControllerContext;
  */
 public abstract class ActionResult
 {
-    public abstract void executeResult(ControllerContext controllerContext);
+    public abstract void executeResult(ControllerContext controllerContext) throws ActionResultException;
 }

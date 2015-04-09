@@ -12,6 +12,7 @@ public class ControllerContext
 {
     private HttpContext httpContext;
     private RouteData routeData;
+    private ControllerBase controller;
 
     public ControllerBase getController()
     {
@@ -32,8 +33,6 @@ public class ControllerContext
     {
         this.routeData = routeData;
     }
-
-    private ControllerBase controller;
 
     public HttpContext getHttpContext()
     {

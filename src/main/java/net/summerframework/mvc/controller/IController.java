@@ -10,5 +10,6 @@ import net.summerframework.mvc.common.HttpContext;
 public interface IController
 {
     void execute(HttpContext requestContext);
+
     void release();
 }
