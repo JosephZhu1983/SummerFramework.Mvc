@@ -29,6 +29,11 @@ public class ActionDescriptor
         init();
     }
 
+    public Method getAction()
+    {
+        return action;
+    }
+
     public String getActionName()
     {
         return actionName;

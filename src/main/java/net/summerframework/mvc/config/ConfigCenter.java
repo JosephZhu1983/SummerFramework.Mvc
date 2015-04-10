@@ -1,5 +1,6 @@
 package net.summerframework.mvc.config;
 
+import net.summerframework.mvc.action.ActionMethodValidators;
 import net.summerframework.mvc.action.IActionInvoker;
 import net.summerframework.mvc.controller.IControllerFactory;
 import net.summerframework.mvc.filter.FilterProviders;
@@ -21,6 +22,7 @@ public class ConfigCenter
     private IControllerFactory controllerFactory;
     private IActionInvoker actionInvoker;
     private FilterProviders filterProviders = new FilterProviders();
+    private ActionMethodValidators actionMethodValidators = new ActionMethodValidators();
 
     private ConfigCenter()
     {
@@ -29,6 +31,11 @@ public class ConfigCenter
     public static ConfigCenter getInstance()
     {
         return instance;
+    }
+
+    public ActionMethodValidators getActionMethodValidators()
+    {
+        return actionMethodValidators;
     }
 
     public FilterProviders getFilterProviders()

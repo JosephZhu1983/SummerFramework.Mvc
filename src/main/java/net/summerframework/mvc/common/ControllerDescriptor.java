@@ -1,7 +1,6 @@
 package net.summerframework.mvc.common;
 
-import net.summerframework.mvc.action.ActionMethodSelector;
-import net.summerframework.mvc.action.ActionResult;
+import net.summerframework.mvc.action.*;
 import net.summerframework.mvc.controller.IController;
 import net.summerframework.mvc.filter.*;
 
@@ -34,6 +33,11 @@ public class ControllerDescriptor
         init();
     }
 
+    public List<ActionDescriptor> getActionDescriptors()
+    {
+        return actionDescriptors;
+    }
+
     public String getControllerName()
     {
         return controllerName;
@@ -44,10 +48,9 @@ public class ControllerDescriptor
         return filtersInfo;
     }
 
-    public ActionDescriptor findAction(ControllerContext controllerContext, String actionName)
+    public ActionDescriptor findAction(ControllerContext controllerContext, String actionName) throws ActionMethodSelectorException
     {
-        Method action = actionMethodSelector.findActionMethod(controllerContext, actionName);
-        return new ActionDescriptor(action, this);
+        return actionMethodSelector.findAction(controllerContext, this, actionName);
     }
 
     private void init()

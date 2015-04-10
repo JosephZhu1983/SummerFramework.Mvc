@@ -23,7 +23,15 @@ public class DefaultActionInvoker implements IActionInvoker
     public void invokeAction(ControllerContext controllerContext, String actionName) throws ActionInvokerException
     {
         ControllerDescriptor controllerDescriptor = getControllerDescriptor(controllerContext.getController().getClass());
-        ActionDescriptor actionDescriptor = controllerDescriptor.findAction(controllerContext, actionName);
+        ActionDescriptor actionDescriptor = null;
+        try
+        {
+            actionDescriptor = controllerDescriptor.findAction(controllerContext, actionName);
+        }
+        catch (ActionMethodSelectorException exception)
+        {
+            throw new ActionInvokerException(String.format("Error invoking action : %s.%s", controllerDescriptor.getControllerName(), actionDescriptor.getActionName()), exception);
+        }
         FilterProviders.Filters filters = ConfigCenter.getInstance().getFilterProviders().getFilters(controllerContext, actionDescriptor);
 
         ActionResult actionResult = null;
