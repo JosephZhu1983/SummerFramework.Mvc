@@ -46,7 +46,8 @@ public class ControllerDescriptor
 
     public ActionDescriptor findAction(ControllerContext controllerContext, String actionName)
     {
-        return null;
+        Method action = actionMethodSelector.findActionMethod(controllerContext, actionName);
+        return new ActionDescriptor(action, this);
     }
 
     private void init()
