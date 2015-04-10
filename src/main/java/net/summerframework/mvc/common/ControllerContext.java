@@ -14,6 +14,18 @@ public class ControllerContext
     private RouteData routeData;
     private ControllerBase controller;
 
+    public ControllerContext()
+    {
+
+    }
+
+    public ControllerContext(ControllerContext controllerContext)
+    {
+        this.httpContext = controllerContext.getHttpContext();
+        this.routeData = controllerContext.getRouteData();
+        this.controller = controllerContext.getController();
+    }
+
     public ControllerBase getController()
     {
         return controller;

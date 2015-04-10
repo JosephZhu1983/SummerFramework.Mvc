@@ -17,6 +17,14 @@ public class ActionExecutedContext extends ControllerContext
     private Exception exception;
     private boolean exceptionHandled;
 
+    public ActionExecutedContext(ControllerContext controllerContext, ActionDescriptor actionDescriptor, boolean canceled, Exception exception)
+    {
+        super(controllerContext);
+        this.actionDescriptor = actionDescriptor;
+        this.canceled = canceled;
+        this.exception = exception;
+    }
+
     public ActionDescriptor getActionDescriptor()
     {
         return actionDescriptor;

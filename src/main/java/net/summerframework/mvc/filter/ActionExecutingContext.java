@@ -14,6 +14,11 @@ public class ActionExecutingContext extends ControllerContext
     private ActionDescriptor actionDescriptor;
     private ActionResult actionResult;
 
+    public ActionExecutingContext(ControllerContext controllerContext, ActionDescriptor actionDescriptor)
+    {
+        super(controllerContext);
+    }
+
     public ActionResult getActionResult()
     {
         return actionResult;

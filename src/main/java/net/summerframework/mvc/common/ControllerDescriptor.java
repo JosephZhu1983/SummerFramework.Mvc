@@ -16,13 +16,14 @@ import java.util.*;
 public class ControllerDescriptor
 {
     private final Class<? extends IController> controllerType;
+    private final String controllerName;
     private final ActionMethodSelector actionMethodSelector = new ActionMethodSelector();
     private final List<ActionDescriptor> actionDescriptors = new ArrayList<>();
     private List<FilterInfo> filtersInfo = new ArrayList<>();
-
     public ControllerDescriptor(Class<? extends IController> controllerType)
     {
         this.controllerType = controllerType;
+        this.controllerName = controllerType.getName();
         for (Method method : controllerType.getMethods())
         {
             if (method.getReturnType() == ActionResult.class)
@@ -31,6 +32,11 @@ public class ControllerDescriptor
             }
         }
         init();
+    }
+
+    public String getControllerName()
+    {
+        return controllerName;
     }
 
     public Collection<FilterInfo> getFiltersInfo()

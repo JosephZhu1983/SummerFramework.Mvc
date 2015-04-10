@@ -3,7 +3,9 @@ package net.summerframework.mvc.controller;
 import net.summerframework.mvc.common.HttpContext;
 import org.reflections.Reflections;
 
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * http://www.SummerFramework.net
@@ -35,14 +37,20 @@ public class DefaultControllerFactory implements IControllerFactory
 
     public IController createController(HttpContext httpContext, String controllerName) throws ControllerActivatorException, ControllerFactoryException
     {
-        for (Class<? extends IController> controllerType : controllerTypes)
+        List<Class<? extends IController>> matchedControllerTypes = controllerTypes.stream().filter(controllerType -> controllerType.getSimpleName().equalsIgnoreCase(controllerName)).collect(Collectors.toList());
+        if (matchedControllerTypes.size() == 0)
         {
-            if (controllerType.getSimpleName().equalsIgnoreCase(controllerName))
-            {
-                return controllerActivator.create(httpContext, controllerType);
-            }
+            throw new ControllerFactoryException(String.format("Can not find controller matched to name %s", controllerName));
         }
-        throw new ControllerFactoryException(String.format("Can not find controller matched to name %s", controllerName));
+        else if (matchedControllerTypes.size() == 1)
+        {
+            return controllerActivator.create(httpContext, matchedControllerTypes.get(0));
+        }
+        else
+        {
+            throw new ControllerFactoryException(String.format("Too many controllers matched to name %s, result : %s", controllerName, controllerTypes.stream()
+                    .map(type -> type.getName()).reduce((a, b) -> a + "," + b).get()));
+        }
     }
 
     public void releaseController(IController controller)
