@@ -88,4 +88,14 @@ public abstract class Controller extends ControllerBase implements IGeneralFilte
     {
         return new ContentResult(type, charset, content);
     }
+
+    protected JsonResult Json(Object data)
+    {
+        return new JsonResult(data);
+    }
+
+    protected JsonResult Json(String type, String charset, JsonRequestBehavior behavior, Object data)
+    {
+        return new JsonResult(type, charset, behavior, data);
+    }
 }

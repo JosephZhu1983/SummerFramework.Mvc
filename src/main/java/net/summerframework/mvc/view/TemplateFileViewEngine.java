@@ -8,6 +8,7 @@ import java.nio.file.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * http://www.SummerFramework.net
@@ -18,8 +19,8 @@ public abstract class TemplateFileViewEngine implements IViewEngine
 {
     protected String[] templateFileLocations = new String[]
             {
-                    "views/{controller}/{action}.{ext}",
-                    "{controller}/{action}.{ext}"
+                    "views/{controller}/{action}",
+                    "{controller}/{action}"
             };
 
     protected abstract String[] getFileExtensions();
@@ -41,25 +42,22 @@ public abstract class TemplateFileViewEngine implements IViewEngine
 
         for (String location : templateFileLocations)
         {
-            for (String ext : getFileExtensions())
+            try
             {
-                try
+                String path = location.replace("{controller}", controllerContext.getRouteData().getControllerName().replace("{action}", controllerContext.getRouteData().getActionName())).toLowerCase();
+                List<Path> matchedPaths = Files.list(basePath).filter(p -> p.toString().equalsIgnoreCase(path) && Stream.of(getFileExtensions()).anyMatch(ext -> path.endsWith(ext))).collect(Collectors.toList());
+                if (matchedPaths.size() > 0)
                 {
-                    String path = location.replace("{controller}", controllerContext.getRouteData().getControllerName().replace("{action}", controllerContext.getRouteData().getActionName().replace("{ext}", ext))).toLowerCase();
-                    List<Path> matchedPaths = Files.list(basePath).filter(p -> p.toString().equalsIgnoreCase(path)).collect(Collectors.toList());
-                    if (matchedPaths.size() > 0)
-                    {
-                        return new ViewEngineResult(getView(matchedPaths.get(0).toString()), this);
-                    }
-                    else
-                    {
-                        searchedLocations.add(path);
-                    }
+                    return new ViewEngineResult(getView(matchedPaths.get(0).toString()), this);
                 }
-                catch (IOException e)
+                else
                 {
-                    e.printStackTrace();
+                    searchedLocations.add(path);
                 }
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
             }
         }
 

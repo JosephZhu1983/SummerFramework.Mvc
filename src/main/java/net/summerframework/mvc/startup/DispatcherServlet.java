@@ -65,48 +65,5 @@ public class DispatcherServlet extends HttpServlet
             }
             controllerFactory.releaseController(controller);
         }
-
-
-        //System.out.println(request.getServletContext().getRealPath("template.mustache"));
-        //MustacheFactory mf = new DefaultMustacheFactory("views");
-        // Mustache mustache = mf.compile("template.mustache");
-        // mustache.execute(response.getWriter(), new Example()).flush();
-
-
-
-
-       /* VelocityEngine ve = new VelocityEngine();
-        //ve.setProperty(RuntimeConstants.FILE_RESOURCE_LOADER_PATH, "path/to/templates");
-
-        ve.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-        ve.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        ve.init();
-        *//*  next, get the Template  *//*
-        Template t = ve.getTemplate("helloworld.vm");
-
-        *//*  create a context and add data *//*
-         *//* create our list of maps  *//*
-        ArrayList list = new ArrayList();
-        Map map = new HashMap();
-        map.put("name", "horse");
-        map.put("price", "00.00");
-        list.add(map);
-
-        map = new HashMap();
-        map.put("name", "dog");
-        map.put("price", "9.99");
-        list.add(map);
-        map = new HashMap();
-        map.put("name", "bear");
-        map.put("price", ".99");
-        list.add(map);
-
-        VelocityContext context = new VelocityContext();
-        context.put("petList", list);
-
-        *//* now render the template into a StringWriter *//*
-        StringWriter writer = new StringWriter();
-        t.merge(context, response.getWriter());
-        */
     }
 }
