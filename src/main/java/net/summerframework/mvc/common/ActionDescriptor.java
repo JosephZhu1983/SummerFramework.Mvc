@@ -18,6 +18,7 @@ public class ActionDescriptor
     private final List<ParameterDescriptor> parameterDescriptors = new ArrayList<>();
     private String actionName;
     private List<FilterInfo> filtersInfo = new ArrayList<>();
+
     public ActionDescriptor(Method action, ControllerDescriptor controllerDescriptor)
     {
         this.action = action;

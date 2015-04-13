@@ -5,6 +5,6 @@ package net.summerframework.mvc.filter;
  * Joseph Zhu
  * yzhu@live.com
  */
-public interface IGeneralFilter extends IExceptionFilter, IActionFilter, IResultFilter
+public interface IGeneralFilter extends IFilter, IExceptionFilter, IActionFilter, IResultFilter
 {
 }

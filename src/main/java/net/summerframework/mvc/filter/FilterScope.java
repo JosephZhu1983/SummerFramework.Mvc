@@ -7,7 +7,7 @@ package net.summerframework.mvc.filter;
  */
 public enum FilterScope
 {
-    Undefined(-1), Global(10), Controller(20), Action(30);
+    Undefined(-1), First(0), Global(10), Controller(20), Action(30);
 
     private int scope = 0;
 

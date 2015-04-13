@@ -1,6 +1,6 @@
 package net.summerframework.mvc.common;
 
-import net.summerframework.mvc.controller.ControllerBase;
+import net.summerframework.mvc.controller.Controller;
 import net.summerframework.mvc.routing.RouteData;
 
 /**
@@ -12,7 +12,7 @@ public class ControllerContext
 {
     private HttpContext httpContext;
     private RouteData routeData;
-    private ControllerBase controller;
+    private Controller controller;
 
     public ControllerContext()
     {
@@ -26,12 +26,12 @@ public class ControllerContext
         this.controller = controllerContext.getController();
     }
 
-    public ControllerBase getController()
+    public Controller getController()
     {
         return controller;
     }
 
-    public void setController(ControllerBase controller)
+    public void setController(Controller controller)
     {
         this.controller = controller;
     }

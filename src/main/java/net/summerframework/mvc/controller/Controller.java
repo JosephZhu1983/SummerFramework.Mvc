@@ -12,7 +12,7 @@ import net.summerframework.mvc.view.ViewResult;
  * Joseph Zhu
  * yzhu@live.com
  */
-public abstract class Controller extends ControllerBase implements IExceptionFilter, IActionFilter, IResultFilter
+public abstract class Controller extends ControllerBase implements IGeneralFilter
 {
     private IActionInvoker actionInvoker = ConfigCenter.getInstance().getActionInvoker();
 
@@ -44,6 +44,7 @@ public abstract class Controller extends ControllerBase implements IExceptionFil
     @Override
     protected void executeCore() throws ControllerException
     {
+        controllerContext.setController(this);
         String actionName = controllerContext.getRouteData().getActionName();
         try
         {
@@ -57,7 +58,17 @@ public abstract class Controller extends ControllerBase implements IExceptionFil
 
     protected ViewResult view()
     {
-        return new ViewResult();
+        return view(null, null, null);
+    }
+
+    protected ViewResult view(String viewName, String masterName, Object model)
+    {
+        ViewResult viewResult = new ViewResult();
+        viewResult.setViewName(viewName);
+        viewResult.setMasterName(masterName);
+        viewResult.setViewData(getViewData());
+        viewResult.setTempData(getTempData());
+        return viewResult;
     }
 
     protected PartialViewResult partialView()

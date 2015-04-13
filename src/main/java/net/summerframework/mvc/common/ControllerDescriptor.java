@@ -19,6 +19,7 @@ public class ControllerDescriptor
     private final ActionMethodSelector actionMethodSelector = new ActionMethodSelector();
     private final List<ActionDescriptor> actionDescriptors = new ArrayList<>();
     private List<FilterInfo> filtersInfo = new ArrayList<>();
+
     public ControllerDescriptor(Class<? extends IController> controllerType)
     {
         this.controllerType = controllerType;
