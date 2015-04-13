@@ -2,8 +2,6 @@ package net.summerframework.mvc.view;
 
 import net.summerframework.mvc.common.ViewContext;
 
-import java.io.PrintWriter;
-
 /**
  * http://www.SummerFramework.net
  * Joseph Zhu
@@ -11,5 +9,7 @@ import java.io.PrintWriter;
  */
 public interface IView
 {
-    void render(ViewContext viewContext, PrintWriter writer);
+    void render(ViewContext viewContext) throws ViewException;
+
+    void release();
 }

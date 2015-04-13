@@ -6,6 +6,8 @@ import net.summerframework.mvc.controller.IControllerFactory;
 import net.summerframework.mvc.filter.FilterProviders;
 import net.summerframework.mvc.filter.IFilterProvider;
 import net.summerframework.mvc.routing.*;
+import net.summerframework.mvc.view.IViewEngine;
+import net.summerframework.mvc.view.ViewEngines;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +25,7 @@ public class ConfigCenter
     private IActionInvoker actionInvoker;
     private FilterProviders filterProviders = new FilterProviders();
     private ActionMethodValidators actionMethodValidators = new ActionMethodValidators();
+    private ViewEngines viewEngines = new ViewEngines();
 
     private ConfigCenter()
     {
@@ -51,6 +54,21 @@ public class ConfigCenter
     public void addFilterProvider(IFilterProvider filterProvider)
     {
         filterProviders.add(filterProvider);
+    }
+
+    public ViewEngines getViewEngines()
+    {
+        return viewEngines;
+    }
+
+    public void removeAllViewEngines()
+    {
+        viewEngines.clear();
+    }
+
+    public void addViewEngine(IViewEngine viewEngine)
+    {
+        viewEngines.add(viewEngine);
     }
 
     public IActionInvoker getActionInvoker()

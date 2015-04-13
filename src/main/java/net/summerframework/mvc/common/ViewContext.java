@@ -2,6 +2,8 @@ package net.summerframework.mvc.common;
 
 import net.summerframework.mvc.view.*;
 
+import java.io.PrintWriter;
+
 /**
  * http://www.SummerFramework.net
  * Joseph Zhu
@@ -9,18 +11,28 @@ import net.summerframework.mvc.view.*;
  */
 public class ViewContext extends ControllerContext
 {
-    private ViewData viewData;
-    private TempData tempData;
-    private IView view;
+    private final ViewData viewData;
+    private final TempData tempData;
+    private final IView view;
+    private final PrintWriter writer;
+
+    public ViewContext(ControllerContext controllerContext, IView view, ViewData viewData, TempData tempData, PrintWriter writer)
+    {
+        super(controllerContext);
+        this.view = view;
+        this.viewData = viewData;
+        this.tempData = tempData;
+        this.writer = writer;
+    }
+
+    public PrintWriter getWriter()
+    {
+        return writer;
+    }
 
     public ViewData getViewData()
     {
         return viewData;
-    }
-
-    public void setViewData(ViewData viewData)
-    {
-        this.viewData = viewData;
     }
 
     public TempData getTempData()
@@ -28,18 +40,9 @@ public class ViewContext extends ControllerContext
         return tempData;
     }
 
-    public void setTempData(TempData tempData)
-    {
-        this.tempData = tempData;
-    }
-
     public IView getView()
     {
         return view;
     }
 
-    public void setView(IView view)
-    {
-        this.view = view;
-    }
 }

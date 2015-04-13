@@ -1,29 +1,23 @@
 package net.summerframework.mvc.view;
 
-import net.summerframework.mvc.common.ControllerContext;
+import com.github.mustachejava.DefaultMustacheFactory;
 
 /**
  * http://www.SummerFramework.net
  * Joseph Zhu
  * yzhu@live.com
  */
-public class MustacheViewEngine implements IViewEngine
+public class MustacheViewEngine extends TemplateFileViewEngine
 {
     @Override
-    public ViewEngineResult findPartialView(ControllerContext controllerContext, String partialViewName)
+    protected String[] getFileExtensions()
     {
-        return null;
+        return new String[]{".mustache"};
     }
 
     @Override
-    public ViewEngineResult findView(ControllerContext controllerContext, String viewName, String masterName)
+    protected IView getView(String fileName)
     {
-        return null;
-    }
-
-    @Override
-    public void ReleaseView(ControllerContext controllerContext, IView view)
-    {
-
+        return new MustacheView(new DefaultMustacheFactory(), fileName);
     }
 }

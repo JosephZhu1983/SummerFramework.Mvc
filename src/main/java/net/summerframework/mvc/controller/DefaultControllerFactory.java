@@ -18,7 +18,7 @@ public class DefaultControllerFactory implements IControllerFactory
 
     static
     {
-        Reflections reflections = new Reflections();
+        Reflections reflections = new Reflections("controllers");
         for (Class<? extends IController> controllerType : reflections.getSubTypesOf(IController.class))
         {
             if (controllerType != ControllerBase.class && controllerType != Controller.class)

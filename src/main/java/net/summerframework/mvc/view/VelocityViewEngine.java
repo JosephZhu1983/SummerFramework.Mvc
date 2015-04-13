@@ -1,29 +1,30 @@
 package net.summerframework.mvc.view;
 
-import net.summerframework.mvc.common.ControllerContext;
+import org.apache.velocity.app.VelocityEngine;
+import org.apache.velocity.runtime.RuntimeConstants;
+import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
  * http://www.SummerFramework.net
  * Joseph Zhu
  * yzhu@live.com
  */
-public class VelocityViewEngine implements IViewEngine
+public class VelocityViewEngine extends TemplateFileViewEngine
 {
     @Override
-    public ViewEngineResult findPartialView(ControllerContext controllerContext, String partialViewName)
+    protected String[] getFileExtensions()
     {
-        return null;
+        return new String[]{".vm"};
     }
 
     @Override
-    public ViewEngineResult findView(ControllerContext controllerContext, String viewName, String masterName)
+    protected IView getView(String viewName)
     {
-        return null;
+        VelocityEngine velocityEngine = new VelocityEngine();
+        velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+        velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        velocityEngine.init();
+        return new VelocityView(velocityEngine, viewName);
     }
 
-    @Override
-    public void ReleaseView(ControllerContext controllerContext, IView view)
-    {
-
-    }
 }

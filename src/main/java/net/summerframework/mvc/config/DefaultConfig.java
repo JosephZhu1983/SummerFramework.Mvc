@@ -4,6 +4,8 @@ import net.summerframework.mvc.action.DefaultActionInvoker;
 import net.summerframework.mvc.controller.DefaultControllerActivator;
 import net.summerframework.mvc.controller.DefaultControllerFactory;
 import net.summerframework.mvc.filter.*;
+import net.summerframework.mvc.view.MustacheViewEngine;
+import net.summerframework.mvc.view.VelocityViewEngine;
 
 /**
  * http://www.SummerFramework.net
@@ -24,5 +26,9 @@ public class DefaultConfig implements IConfig
         configCenter.addFilterProvider(new ControllerInstanceFilterProvider());
         configCenter.addFilterProvider(new AnnotationFilterProvider());
         configCenter.addFilterProvider(new GlobalFilters());
+
+        configCenter.removeAllViewEngines();
+        configCenter.addViewEngine(new VelocityViewEngine());
+        configCenter.addViewEngine(new MustacheViewEngine());
     }
 }

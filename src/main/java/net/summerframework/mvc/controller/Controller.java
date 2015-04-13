@@ -5,7 +5,6 @@ import net.summerframework.mvc.common.ControllerException;
 import net.summerframework.mvc.config.ConfigCenter;
 import net.summerframework.mvc.filter.*;
 import net.summerframework.mvc.view.PartialViewResult;
-import net.summerframework.mvc.view.ViewResult;
 
 /**
  * http://www.SummerFramework.net
@@ -67,6 +66,10 @@ public abstract class Controller extends ControllerBase implements IGeneralFilte
         viewResult.setViewName(viewName);
         viewResult.setMasterName(masterName);
         viewResult.setViewData(getViewData());
+        if (model != null)
+        {
+            viewResult.getViewData().setModel(model);
+        }
         viewResult.setTempData(getTempData());
         return viewResult;
     }

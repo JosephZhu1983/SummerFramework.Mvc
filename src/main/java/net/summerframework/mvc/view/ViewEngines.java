@@ -16,9 +16,22 @@ public class ViewEngines extends ArrayList<IViewEngine>
         return null;
     }
 
-    ViewEngineResult findView(ControllerContext controllerContext, String viewName, String masterName)
+    public ViewEngineResult findView(ControllerContext controllerContext, String viewName, String masterName)
     {
-        return null;
+        ArrayList<String> searchedLocations = new ArrayList<>();
+        for (IViewEngine viewEngine : this)
+        {
+            ViewEngineResult viewEngineResult = viewEngine.findView(controllerContext, viewName, masterName);
+            if (viewEngineResult.getView() != null)
+            {
+                return viewEngineResult;
+            }
+            else
+            {
+                searchedLocations.addAll(viewEngineResult.getSearchedLocations());
+            }
+        }
+        return new ViewEngineResult(searchedLocations);
     }
 
 }

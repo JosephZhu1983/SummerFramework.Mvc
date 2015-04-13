@@ -13,5 +13,5 @@ public interface IViewEngine
 
     ViewEngineResult findView(ControllerContext controllerContext, String viewName, String masterName);
 
-    void ReleaseView(ControllerContext controllerContext, IView view);
+    void releaseView(ControllerContext controllerContext, IView view);
 }
