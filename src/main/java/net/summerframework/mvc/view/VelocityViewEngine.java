@@ -11,6 +11,15 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
  */
 public class VelocityViewEngine extends TemplateFileViewEngine
 {
+    private VelocityEngine velocityEngine = new VelocityEngine();
+
+    public VelocityViewEngine()
+    {
+        velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+        velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        velocityEngine.init();
+    }
+
     @Override
     protected String[] getFileExtensions()
     {
@@ -20,10 +29,6 @@ public class VelocityViewEngine extends TemplateFileViewEngine
     @Override
     protected IView getView(String viewName)
     {
-        VelocityEngine velocityEngine = new VelocityEngine();
-        velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-        velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
-        velocityEngine.init();
         return new VelocityView(velocityEngine, viewName);
     }
 

@@ -9,6 +9,8 @@ import com.github.mustachejava.DefaultMustacheFactory;
  */
 public class MustacheViewEngine extends TemplateFileViewEngine
 {
+    private DefaultMustacheFactory defaultMustacheFactory = new DefaultMustacheFactory();
+
     @Override
     protected String[] getFileExtensions()
     {
@@ -18,6 +20,6 @@ public class MustacheViewEngine extends TemplateFileViewEngine
     @Override
     protected IView getView(String fileName)
     {
-        return new MustacheView(new DefaultMustacheFactory(), fileName);
+        return new MustacheView(defaultMustacheFactory, fileName);
     }
 }
