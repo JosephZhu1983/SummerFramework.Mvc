@@ -11,6 +11,11 @@ public class FreemarkerViewEngine extends TemplateFileViewEngine
 {
     private Configuration configuration = new Configuration(Configuration.VERSION_2_3_22);
 
+    public FreemarkerViewEngine()
+    {
+        configuration.setDefaultEncoding("UTF-8");
+    }
+
     @Override
     protected String[] getFileExtensions()
     {

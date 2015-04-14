@@ -1,8 +1,6 @@
 package net.summerframework.mvc.view;
 
 import org.apache.velocity.app.VelocityEngine;
-import org.apache.velocity.runtime.RuntimeConstants;
-import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 
 /**
  * http://www.SummerFramework.net
@@ -15,8 +13,8 @@ public class VelocityViewEngine extends TemplateFileViewEngine
 
     public VelocityViewEngine()
     {
-        velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
-        velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
+        //velocityEngine.setProperty(RuntimeConstants.RESOURCE_LOADER, "classpath");
+        //velocityEngine.setProperty("classpath.resource.loader.class", ClasspathResourceLoader.class.getName());
         velocityEngine.init();
     }
 
